@@ -10,8 +10,45 @@ if (!('webkitSpeechRecognition' in window)) {
   recognition.maxAlternatives = 1; //Since from our experience, the highest result is really the best...
 }
 
+Template.speechRecorder.created = function () {
+  Session.set('recording', false);
+  Session.set('speechToText', '');
+  Session.set('interimSpeechToText', '');
+};
+
+Template.speechRecorder.helpers({
+  'micImage': function () {
+    if (Session.get('recording')) {
+      return 'https://speechlogger.appspot.com/images/micslash2.png';
+    } else {
+      return 'https://speechlogger.appspot.com/images/micoff2.png';
+    }
+  },
+  'speechToText': function () {
+    return Session.get('speechToText');
+  },
+  'interimSpeechToText': function () {
+    return Session.get('interimSpeechToText');
+  }
+});
+
+Template.speechRecorder.events({
+  'click .speech-recorder': function (event) {
+    if (Session.get('recording')) {
+      recognition.onend();
+    } else {
+      recognition.start();
+    }
+  }
+});
+
+
+/**
+ * Speech Recognition Callbacks
+ */
+
 recognition.onresult = function (event) { //the event holds the results
-  // error
+                                          // error
   if (typeof(event.results) === 'undefined') {
     recognition.stop();
     return;
@@ -20,38 +57,39 @@ recognition.onresult = function (event) { //the event holds the results
   for (var i = event.resultIndex; i < event.results.length; ++i) {
     if (event.results[i].isFinal) { //Final results
       console.log("final results: " + event.results[i][0].transcript);   //Of course – here is the place to do useful things with the results.
+      Session.set('speechToText', event.results[i][0].transcript);
     } else {   //i.e. interim...
       console.log("interim results: " + event.results[i][0].transcript);  //You can use these results to give the user near real time experience.
+      Session.set('interimSpeechToText', event.results[i][0].transcript);
     }
   }
 };
 
-recognition.onstart = function() {
-  Template.speechRecorder.set('recording', true);
+recognition.onstart = function () {
+  console.log('recognition onstart');
+  Session.set('recording', true);
+  Session.set('speechToText', '');
+  Session.set('interimSpeechToText', '');
 };
 
-recognition.onend = function() {
-  Template.speechRecorder.set('recording', false);
+recognition.onend = function () {
+  console.log('recognition onend');
+  Session.set('recording', false);
   // start recognizer again
 };
 
-Template.speechRecorder.created = function () {
-  this.state = new ReactiveDict();
-  this.state.set('recording', false)
+recognition.onspeechstart = function () {
+  console.log('recognition onspeechstart');
 };
 
-Template.speechRecorder.helpers({
-  'micImage': function () {
-    if (Template.instance().state.get('recording')) {
-      return 'https://speechlogger.appspot.com/images/micslash2.png';
-    } else {
-      return 'https://speechlogger.appspot.com/images/micoff2.png';
-    }
-  }
-});
+recognition.onspeechend = function () {
+  console.log('recognition onspeechend');
+};
 
-Template.speechRecorder.events({
-  '.speech-recorder click': function (event) {
-    recognition.start();
-  }
-});
+recognition.onnomatch = function (event) {
+  console.log('recognition onnomatch + event');
+};
+
+recognition.onerror = function (event) {
+  console.log('recognition onerror + event');
+};
