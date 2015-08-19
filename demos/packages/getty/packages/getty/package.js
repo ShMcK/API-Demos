@@ -20,6 +20,6 @@ Package.onUse(function (api) {
 
 Package.onTest(function (api) {
   api.use('tinytest');
-  api.use('shmck:giphy');
+  api.use('shmck:giphy');ƒ
   api.addFiles('giphy-tests.js');
 });
