@@ -1,8 +1,0 @@
-<form (ng-submit)="onSubmit()" [ng-form-model]="form" #f="form">
-
-  <p>
-    <input type="text" id="text-input" ng-control="textInput" />
-  </p>
-
-  <button type="submit" [disabled]="!f.form.valid">Submit</button>
-</form>

@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "pos": {
+      "version": "0.3.0"
+    },
+    "pos-chunker": {
+      "version": "1.3.2",
+      "dependencies": {
+        "xregexp": {
+          "version": "2.0.0"
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'shmck:giphy',
+  name: 'shmck:getty',
   version: '0.0.1',
   summary: 'Getty API Package',
   git: '//github.com/ShMcK/api-demos/getty/packages/getty/',
@@ -20,6 +20,6 @@ Package.onUse(function (api) {
 
 Package.onTest(function (api) {
   api.use('tinytest');
-  api.use('shmck:giphy');ƒ
+  api.use('shmck:giphy');
   api.addFiles('giphy-tests.js');
 });

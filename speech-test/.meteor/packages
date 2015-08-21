@@ -5,7 +5,5 @@
 # but you can also edit it by hand.
 
 meteor-platform
-http
-shmck:giphy
-shmck:getty
-shmck:web-speech
+autopublish
+insecure
