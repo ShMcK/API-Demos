@@ -1,4 +1,4 @@
-function reformatRandomImage(data) {
+reformatRandomImage = function reformatRandomImage(data) {
   switch (settings.size) {
     case 'original':
       return {
@@ -24,10 +24,10 @@ function reformatRandomImage(data) {
     default:
       throw 'Not a valid settings size for images';
   }
-}
+};
 
-function getTheme() {
+getTheme = function getTheme() {
   return settings.useTheme
     ? settings.theme + ' '
     : '';
-}
+};

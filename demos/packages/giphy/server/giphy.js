@@ -1,6 +1,6 @@
 Meteor.methods({
   giphy: function (query) {
-    var settings = Giphy.settings;
+    settings = Giphy.settings;
     var isRandom = !(_.isString(query));
     this.unblock();
     var apiCall = ROOT_API + // api
@@ -10,7 +10,7 @@ Meteor.methods({
       (settings.useRating ? 'rating=' + settings.rating : '') + // rating
       '&' +
       ('api_key=' + settings.API_KEY) + // api key
-      (isRandom ? '' : '&limit=1'); // limit
+      (isRandom ? '' : '&limit=1'); // limitƒ
 
     return new Promise(function (resolve, reject) {
       return HTTP.get(apiCall, function (error, result) {
