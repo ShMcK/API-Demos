@@ -1,0 +1,6 @@
+<form ng-submit="vm.submit()" novalidate>
+  <input type="text" ng-model="vm.gifQuery"/>
+  <button type="submit">Find</button>
+</form>
+
+<giphy-image ng-repeat="gif in vm.gifs track by $index" gif="gif"></giphy-image>
