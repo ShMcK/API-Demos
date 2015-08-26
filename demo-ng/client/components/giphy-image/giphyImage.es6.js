@@ -3,7 +3,8 @@ function giphyImage() {
     templateUrl: 'client/components/giphy-image/giphy-image.ng.html',
     controllerAs: 'vm',
     scope: {
-      gif: '='
+      gif: '=',
+      index: '@'
     },
     controller: function () {
       console.log(this.gif);

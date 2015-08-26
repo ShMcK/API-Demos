@@ -3,4 +3,4 @@
   <button type="submit">Find</button>
 </form>
 
-<giphy-image ng-repeat="gif in vm.gifs track by $index" gif="gif"></giphy-image>
+<giphy-image ng-repeat="gif in vm.gifs track by $index" gif="gif" index="{{$index}}"></giphy-image>

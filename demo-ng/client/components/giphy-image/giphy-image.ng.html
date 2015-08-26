@@ -1,2 +1,21 @@
-<img ng-src="{{gif.url}}"
-     ng-style="{'width':gif.width, 'height':gif.height, 'frameBorder':'0'}">
+<style>
+  .giphy-image {
+    display: inline-block;
+  }
+
+  .giphy-image img {
+    border: solid 2px black;
+    margin: 5px;
+  }
+
+  .giphy-image p {
+    text-align: center;
+  }
+</style>
+
+<div class="giphy-image">
+  <img ng-src="{{gif.url}}"
+       ng-style="{'width':gif.width, 'height':gif.height, 'frameBorder':'0'}">
+
+  <p ng-if="index">{{index}}</p>
+</div>
